@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/br/dev/diegogarcia/gnome/Alternate">
+    <file preprocess="xml-stripblanks" compressed="true">data/icons/cogged-wheel-symbolic.svg</file>
+    <file preprocess="xml-stripblanks" compressed="true">data/ui/compiled/window.ui</file>
+  </gresource>
+</gresources>
