@@ -6,8 +6,8 @@ use gtk::{
 const APP_NAME: &str = "Alternate";
 const APP_DOMAIN: &str = "br.dev.diegogarcia.gnome";
 
-const APP_ID: &str = APP_DOMAIN + "." + APP_NAME;
-const APP_PATH: &str = "/" + APP_ID.replace(".", "/");
+const APP_ID: &str = "br.dev.diegogarcia.gnome.Alternate";
+const APP_PATH: &str = "br/dev/diegogarcia/gnome/Alternate";
 
 fn main() -> gtk::glib::ExitCode {
     let app = adw::Application::builder() //

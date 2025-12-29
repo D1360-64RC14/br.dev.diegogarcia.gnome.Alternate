@@ -20,18 +20,16 @@ fn build_ui() {
     let blueprint_paths = WalkDir::new(ui_path) //
         .into_iter()
         .filter_map(|item| match item {
-            Ok(item) if item.path().is_file() && item.path().ends_with(".blp") => {
-                match item.path().to_str() {
-                    Some(path_str) => Some(path_str.to_owned()),
-                    None => None,
-                }
-            }
+            Ok(item) if item.path().is_file() => match item.path().to_str() {
+                Some(path_str) if path_str.ends_with(".blp") => Some(path_str.to_string()),
+                _ => None,
+            },
             _ => None,
         })
-        .collect::<Vec<String>>();
+        .collect::<Vec<_>>();
 
     if blueprint_paths.is_empty() {
-        eprintln!("no blueprint files found");
+        eprintln!("no blueprint files found!");
         return;
     }
 
@@ -57,14 +55,18 @@ fn build_gresource() {
     let resource_paths = WalkDir::new(gresource_path) //
         .into_iter()
         .filter_map(|item| match item {
-            Ok(item) if item.path().is_file() && item.path().ends_with(".gresource.xml") => {
-                match item.path().to_str() {
-                    Some(path_str) => Some(path_str.to_owned()),
-                    None => None,
-                }
-            }
+            Ok(item) if item.path().is_file() => match item.path().to_str() {
+                Some(path_str) if path_str.ends_with(".gresource.xml") => Some(path_str.to_owned()),
+                _ => None,
+            },
             _ => None,
-        });
+        })
+        .collect::<Vec<_>>();
+
+    if resource_paths.is_empty() {
+        eprintln!("no resource files found!");
+        return;
+    }
 
     for path in resource_paths {
         let glib_compile_resources_output = Command::new("glib-compile-resources") //
